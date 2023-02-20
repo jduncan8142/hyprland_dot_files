@@ -1,0 +1,46 @@
+#!/bin/bash
+
+###########################
+# AutoNumlock config file #
+###########################
+
+# List of USB keyboards to check for.
+# You can specify multiple IDs, separated by space.
+# To get your keyboard ID, run `autonumlock -l`
+devices=('--help')
+
+# Refresh interval (seconds)
+# Length of sleep between USB device checks
+sleeptime=1
+
+
+#### When keyboard is connected ####
+
+# plug-in event
+function on_connect {
+  numlockx on
+  # ... your custom commands go here ...
+}
+
+
+# called each poll when connected
+function on_connect_poll {
+  false 
+  # something must be here, or bash throws a syntax error...
+}
+
+
+#### When keyboard is missing ####
+
+# disconnect event
+function on_disconnect {
+  numlockx off
+  # ...
+}
+
+
+# called each poll when missing
+function on_disconnect_poll {
+  false 
+  # ...
+}
